@@ -3,7 +3,7 @@ const axios = require('axios'); // Importe o módulo axios
 
 const userController = {};
 
-// cria
+
 userController.createUser = async (req, res) => {
     try {
         const user = new User(req.body);
@@ -14,7 +14,7 @@ userController.createUser = async (req, res) => {
     }
 };
 
-//lista
+//lista usuário
 userController.getAllUsers = async (req, res) => {
     try {
         const users = await User.find();
@@ -24,7 +24,7 @@ userController.getAllUsers = async (req, res) => {
     }
 };
 
-//lista por ID
+
 userController.getUserById = async (req, res) => {
     try {
         const user = await User.findById(req.params.id);
@@ -66,7 +66,7 @@ userController.updateUser = async (req, res) => {
     }
 };
 
-//deleta por ID
+
 userController.deleteUser = async (req, res) => {
     try {
         const user = await User.findByIdAndDelete(req.params.id);
@@ -87,16 +87,16 @@ userController.login = async (req, res) => {
         return res.status(400).send({ error: "Usuário não encontrado" });
     }
 
-    // Comparar a senha fornecida com a senha armazenada
+    // verificação login
     if (req.body.password !== user.password) {
         return res.status(400).send({ error: "Senha incorreta" });
     }
 
-    // Se tudo estiver correto, retornar uma resposta de sucesso
+   
     res.send({ success: "Login bem-sucedido!" });
 };
 
-// Criar Funcionário
+
 userController.criarFuncionario = async (req, res) => {
     // Depois de autenticar o usuário...
     fetch('http://localhost:5000/add', {
