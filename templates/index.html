@@ -78,10 +78,9 @@
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                // Redirecionar para a página inicial ou painel do usuário
+                // redirecionamento
                 window.location.href = "/home";
             } else {
-                // Mostrar mensagem de erro
                 alert(data.error);
             }
         })
