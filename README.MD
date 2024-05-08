@@ -9,7 +9,6 @@ npm install nodemon -D
 
 AUTENTICAR O BANCO NO server.js
  OBS: COPIAR O COLAR O LINK DO BANCO MongoDB
-meu link: mongoose.connect('mongodb+srv://nascimentotassi:4459@clustero.okgwpos.mongodb.net/')
 
 PRIMEIRO RODAR O SERVIDOR DA APLICAÇÃO FLASK
 Entrar no arquivo app.py e digitar no terminal: python app.py
@@ -31,9 +30,11 @@ endereço: http://localhost:3001/api/entrar
 PARA LISTAR USUÁRIOS NO INSOMNIA:
 http://localhost:3001/api/users
 
-
 COMO DIVIDIR O TERMINAL PARA RODAR DOIS SERVIDORES:
 3 pontinhos/terminal/dividir terminal
 
+
+Dificuldades:
+Minha maior dificuldade foi descobrir como seria a interligação entre os bancos. No caso, o funcionamento pleno da página login. 
 
 ------------------------------------------------------
