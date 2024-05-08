@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro de Funcionários</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <h1>Cadastro de Funcionários</h1>
+    <form action="http://127.0.0.1:5000/add" method="post">
+      <label for="primeiro_nome">Nome</label>
+      <input type="text" name="primeiro_nome" id="primeiro_nome">
+      <br>
+      <label for="sobrenome">Sobrenome</label>
+      <input type="text" name="sobrenome" id="sobrenome">
+      <br>
+      <label for="data_admissao">Data de Admissão</label>
+      <input type="date" name="data_admissao" id="data_admissao">
+      <br>
+      <label for="setor">Setor</label>
+      <select name="setor" id="setor">
+        <option value="" selected disabled hidden>Selecione o setor</option>
+        <option value="marketing">Marketing</option>
+        <option value="dados">Dados</option>
+        <option value="seguranca">Segurança</option>
+        <option value="devops">DevOps</option>
+      </select>
+      <br>
+      <label for="cargo">Cargo</label>
+      <select name="cargo" id="cargo">
+        <option value="" selected disabled hidden>Selecione o cargo</option>
+        <!-- Opções de cargo para o setor de Marketing -->
+        <option value="estagiario_marketing">Estagiário(a)-Marketing</option>
+        <option value="analista_marketing">Analista de Marketing</option>
+        <option value="gerente_marketing">Gerente de Marketing</option>
+        <!-- Opções de cargo para outros setores -->
+        <option value="estagiario_dados">Estagiário(a)-Dados</option>
+        <option value="cientista_dados">Cientista de Dados</option>
+        <option value="engenheiro_dados">Engenheiro de Dados</option>
+        <option value="analista_bi">Analista de BI (Business Intelligence)</option>
+        <option value="estagiario_seguranca">Estagiário(a)-Segurança</option>
+        <option value="analista_seguranca">Analista de Segurança da Informação</option>
+        <option value="engenheiro_seguranca">Engenheiro de Segurança de Rede</option>
+        <option value="estagiario_devops">Estagiário(a)-DevOps</option>
+        <option value="engenheiro_devops">Engenheiro DevOps</option>
+        <option value="administrador_sistemas">Administrador de Sistemas</option>
+      </select>
+      <br>
+      <button type="submit" id="submit-button">Cadastrar</button>
+    </form>
+  </div>
+  <script>
+    document.getElementById('cadastroForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        var primeiro_nome = document.getElementById('primeiro_nome').value;
+        var sobrenome = document.getElementById('sobrenome').value;
+        var data_admissao = document.getElementById('data_admissao').value;
+        var setor = document.getElementById('setor').value;
+        var cargo = document.getElementById('cargo').value;
+
+        fetch('/api/criarFuncionario', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                primeiro_nome: primeiro_nome,
+                sobrenome: sobrenome,
+                data_admissao: data_admissao,
+                setor: setor,
+                cargo: cargo
+            }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Redirecionar para a página inicial ou painel do usuário
+                window.location.href = "/home";
+            } else {
+                // Mostrar mensagem de erro
+                alert(data.error);
+            }
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+    });
+  </script>
+</body>
+</html>
